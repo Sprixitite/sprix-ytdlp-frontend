@@ -35,9 +35,10 @@ jobs:
             - name: Compress Build Outputs & Upload Release
               id: compress_outputs
               run: |
+                ls -A .
                 sudo apt install zip tar
-                zip ./windows.zip build/windows/runner/Release/ytdl.exe
-                tar -zcf ./linux.tar.gz build/linux/x64/release/bundle/ytdl
+                zip ./windows.zip ./build/windows/runner/Release/ytdl.exe
+                tar -zcf ./linux.tar.gz ./build/linux/x64/release/bundle/ytdl
 
             - uses: "marvinpinto/action-automatic-releases@latest"
               with:
