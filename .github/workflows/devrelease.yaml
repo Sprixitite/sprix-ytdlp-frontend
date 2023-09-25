@@ -56,7 +56,7 @@ jobs:
                 ls -A .
                 sudo apt install zip tar
                 zip ./windows.zip /home/runner/work/sprix-ytdlp-frontend/sprix-ytdlp-frontend/windows-build-artifact
-                tar -zcf /home/runner/work/sprix-ytdlp-frontend/sprix-ytdlp-frontend/linux-build-artifact
+                tar -zcf ./linux.tar.gz /home/runner/work/sprix-ytdlp-frontend/sprix-ytdlp-frontend/linux-build-artifact
 
             - uses: "marvinpinto/action-automatic-releases@latest"
               with:
