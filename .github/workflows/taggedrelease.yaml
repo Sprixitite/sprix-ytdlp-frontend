@@ -21,7 +21,7 @@ jobs:
               uses: actions/upload-artifact@v3
               with:
                 name: windows-build-artifact
-                path: ./build/
+                path: .\build\
     build-linux:
         runs-on: ubuntu-latest
         steps:
@@ -54,8 +54,9 @@ jobs:
               run: |
                 ls -A .
                 sudo apt install zip tar
-                zip ./windows.zip /home/runner/work/sprix-ytdlp-frontend/sprix-ytdlp-frontend/windows-build-artifact
-                tar -zcf ./linux.tar.gz /home/runner/work/sprix-ytdlp-frontend/sprix-ytdlp-frontend/linux-build-artifact
+                cd /home/runner/work/sprix-ytdlp-frontend/sprix-ytdlp-frontend/
+                zip ./windows.zip ./windows-build-artifact/
+                tar -zcf ./linux.tar.gz ./linux-build-artifact/linux/x64/release/
 
             - uses: "marvinpinto/action-automatic-releases@latest"
               with:
