@@ -55,8 +55,8 @@ jobs:
               run: |
                 ls -A .
                 sudo apt install zip tar
-                zip ./windows.zip ./build/windows/runner/Release/ytdl.exe
-                tar -zcf ./linux.tar.gz ./build/linux/x64/release/bundle/ytdl
+                zip ./windows.zip /home/runner/work/sprix-ytdlp-frontend/sprix-ytdlp-frontend/windows-build-artifact
+                tar -zcf /home/runner/work/sprix-ytdlp-frontend/sprix-ytdlp-frontend/linux-build-artifact
 
             - uses: "marvinpinto/action-automatic-releases@latest"
               with:
