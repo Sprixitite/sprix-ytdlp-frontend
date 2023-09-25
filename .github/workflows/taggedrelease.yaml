@@ -2,9 +2,8 @@ name: Create Release
 
 on:
     push:
-        branches: [master]
-    pull_request:
-        branches: [master]
+        tags:
+            - "v*"
 
 jobs:
     build-windows:
@@ -45,31 +44,20 @@ jobs:
                 body: |
                     This release zip is automatically updated on every push/PR.
             
-            - name: Compress Build Outputs
+            - name: Compress Build Outputs & Upload Release
               id: compress_outputs
               run: |
                 sudo apt install zip tar
                 zip ./windows.zip build/windows/x64/release/bundle/ytdl.exe
                 tar -zcf ./linux.tar.gz build/linux/x64/release/bundle/ytdl
 
-            - name: Upload Windows Build To Release
-              id: upload_windows_release
-              uses: actions/upload-release-asset@v1
-              env:
-                GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+            - uses: "marvinpinto/action-automatic-releases@latest"
               with:
-                upload_url: ${{ steps.create_release.outputs.upload_url }}
-                asset_path: ./windows.zip
-                asset_name: windows.zip
-                asset_content_type: application/zip
-
-            - name: Upload Linux Build To Release
-              id: upload_linux_release
-              uses: actions/upload-release-asset@v1
-              env:
-                GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-              with:
-                upload_url: ${{ steps.create_release.outputs.upload_url }}
-                asset_path: ./linux.tar.gz
-                asset_name: linux.tar.gz
-                asset_content_type: application/gzip
+                repo_token: "${{ secrets.GITHUB_TOKEN }}"
+                draft: false
+                prerelease: false
+                automatic_release_tag: "latest"
+                title: "Latest Release Build"
+                files: |
+                    windows.zip
+                    linux.tar.gz
