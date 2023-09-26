@@ -56,7 +56,7 @@ jobs:
               run: |
                 sudo apt install zip tar
                 cd /home/runner/work/sprix-ytdlp-frontend/sprix-ytdlp-frontend/
-                zip -r ./windows.zip ./windows-build-artifact/build/windows/runner/Release
+                zip -r ./windows.zip ./windows-build-artifact/windows/runner/Release
                 tar -zcf ./linux.tar.gz ./linux-build-artifact/linux/x64/release/
 
             - uses: "marvinpinto/action-automatic-releases@latest"
