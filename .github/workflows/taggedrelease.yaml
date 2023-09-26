@@ -13,7 +13,8 @@ jobs:
             - uses: subosito/flutter-action@v2
               with:
                 channel: "stable"
-            - run: flutter config --enable-windows-desktop
+            - run: flutter config --enable-windows-desktop --disable-telemetry
+            - run: flutter clean
             - run: flutter build windows --release
 
             - name: Upload Windows Build Artifact
@@ -32,7 +33,8 @@ jobs:
             - run: |
                 sudo apt-get update -y
                 sudo apt-get install -y ninja-build libgtk-3-dev
-            - run: flutter config --enable-linux-desktop
+            - run: flutter config --enable-linux-desktop --disable-telemetry
+            - run: flutter clean
             - run: flutter build linux --release
 
             - name: Upload Linux Build Artifact
@@ -52,7 +54,6 @@ jobs:
             - name: Compress Build Outputs & Upload Release
               id: compress_outputs
               run: |
-                ls -A .
                 sudo apt install zip tar
                 cd /home/runner/work/sprix-ytdlp-frontend/sprix-ytdlp-frontend/
                 zip ./windows.zip ./windows-build-artifact/
